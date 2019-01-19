@@ -520,7 +520,7 @@ elif [ "${selected}" == "4" ]; then
     "user":"nobody",
     "method":"${shadowsockscipher}",
     "fast_open":${fast_open},
-    "nameserver":"8.8.8.8",
+    "nameserver":"1.0.0.1",
     "mode":"tcp_and_udp",
     "plugin":"obfs-server",
     "plugin_opts":"obfs=${shadowsocklibev_obfs}"
@@ -536,7 +536,7 @@ EOF
     "user":"nobody",
     "method":"${shadowsockscipher}",
     "fast_open":${fast_open},
-    "nameserver":"8.8.8.8",
+    "nameserver":"1.0.0.1",
     "mode":"tcp_and_udp"
 }
 EOF
@@ -603,8 +603,8 @@ install_select(){
         hint="${software[$i-1]}"
         echo -e "${green}${i}${plain}) ${hint}"
     done
-    read -p "Please enter a number (Default ${software[0]}):" selected
-    [ -z "${selected}" ] && selected="1"
+    read -p "Please enter a number (Default ${software[3]}):" selected
+    [ -z "${selected}" ] && selected="4"
     case "${selected}" in
         1|2|3|4)
         echo
@@ -621,8 +621,8 @@ install_select(){
 
 install_prepare_password(){
     echo "Please enter password for ${software[${selected}-1]}"
-    read -p "(Default password: teddysun.com):" shadowsockspwd
-    [ -z "${shadowsockspwd}" ] && shadowsockspwd="teddysun.com"
+    read -p "(Default password: &Eh002@s9F):" shadowsockspwd
+    [ -z "${shadowsockspwd}" ] && shadowsockspwd="&Eh002@s9F"
     echo
     echo "password = ${shadowsockspwd}"
     echo
@@ -631,7 +631,7 @@ install_prepare_password(){
 install_prepare_port() {
     while true
     do
-    dport=$(shuf -i 9000-19999 -n 1)
+    dport=$(shuf -i 21000-50000 -n 1)
     echo -e "Please enter a port for ${software[${selected}-1]} [1-65535]"
     read -p "(Default port: ${dport}):" shadowsocksport
     [ -z "${shadowsocksport}" ] && shadowsocksport=${dport}
@@ -658,8 +658,8 @@ install_prepare_cipher(){
             hint="${common_ciphers[$i-1]}"
             echo -e "${green}${i}${plain}) ${hint}"
         done
-        read -p "Which cipher you'd select(Default: ${common_ciphers[0]}):" pick
-        [ -z "$pick" ] && pick=1
+        read -p "Which cipher you'd select(Default: ${common_ciphers[13]}):" pick
+        [ -z "$pick" ] && pick=14
         expr ${pick} + 1 &>/dev/null
         if [ $? -ne 0 ]; then
             echo -e "[${red}Error${plain}] Please enter a number"
