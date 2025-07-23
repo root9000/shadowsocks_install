@@ -183,7 +183,7 @@ config_haproxy(){
 
     cat > /etc/haproxy/haproxy.cfg<<-EOF
 global
-    ulimit-n    51200
+    ulimit-n    524288
     log         127.0.0.1 local2
     chroot      /var/lib/haproxy
     pidfile     /var/run/haproxy.pid
